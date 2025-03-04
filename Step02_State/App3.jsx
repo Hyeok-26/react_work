@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function App(){
-    console.log("Aop함수 호출출");
+    console.log("App함수 호출");
     const [state, setState] = useState({
         name:"김구라",
         addr:"노량진"
@@ -17,8 +17,8 @@ function App(){
                     ...state,
                     name:e.target.value})
             }} value={state.name}/>
-            
-            주소소 입력<input type="text" onChange={(e)=>{
+            <br/>
+            주소 입력<input type="text" onChange={(e)=>{
                 setState({
                     ...state,
                     addr:e.target.value})
@@ -28,4 +28,5 @@ function App(){
 
     )
 }
+//이 파일을 import 하면 App 함수를 사용할 수있다.
 export default App;
