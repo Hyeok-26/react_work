@@ -56,13 +56,15 @@ function App(){
     return  (
         <>
             <h1>글 목록</h1>
+            <NavLink to="/posts/new">새 글 작성</NavLink>
             <table className="table table-striped">
                 <thead className="table-dark">
                     <tr>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
-                        <td>삭제</td>
+                        <th>수정</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,16 +74,28 @@ function App(){
                             <td>{item.title}</td>
                             <td>{item.author}</td>
                             <td>
-                                <NavLink>
-                                    <button>
-                                        수정정
-                                    </button>
+                                <NavLink to={`/posts/${item.id}/edit`}>
+                                        수정
                                 </NavLink>
                             </td>
-                            <td>
-                                <NavLink to={`/postDelete?id=${item.id}`}>
-                                <button>x</button>
-                                </NavLink>
+                            <td>                                
+                                <button onClick={()=>{
+                                    axios.delete(`/posts/${item.id}`)
+                                    .then(res=>{
+                                        alert(res.data.id+"번의 글을 삭제하였습니다");
+                                        //현재 페이지 정보가 다시 출려되도록 한다
+                                        //refresh(pageInfo.pageNum);
+                                        //refresh() 대신에 아래와 같이 작업할 수 있다.
+                                    
+                                        //LIST 에서 삭제된 글 정보를 실제 삭제한 배열을 얻어내서 상태값 변경
+                                        setPageInfo({
+                                            ...pageInfo,
+                                            list:pageInfo.list.filter(item=>item.id !== res.data.id)
+                                        })
+                                    
+                                    })
+                                    .catch(err=>{console.log(err);})
+                                }}>x</button>
                             </td>
                         </tr>
                     ))}

@@ -1,5 +1,6 @@
 import { NavLink, useNavigate, useOutlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 
 function App(){
@@ -10,23 +11,25 @@ function App(){
     const navigate = useNavigate();
 
     return  (
-        <div className="container">
-            <ul>
-                <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/game">Game</NavLink></li>
-                <li><NavLink to="/study">Study</NavLink></li>
-                <li><NavLink to="/posts">Post</NavLink></li>
-            </ul>
-            <button className="btn btn-primary" onClick={()=>{
-                // javascript 로 "/post" 경로로 라우트되게 하려면?
-                navigate("/posts")
-            }}>Post</button>
-            <button className="btn btn-primary" onClick={()=>{
-                // javascript 로 "/post" 경로로 라우트되게 하려면?
-                navigate("/posts?pageNum=2")
-            }}>Post2</button>
-            <div>{currentOutlet}</div>
-        </div>
+        <>
+            <Navbar expand="md" className="bg-warning">
+                    <Container>
+                        <Navbar.Toggle aria-controls="one"/>
+                        <Navbar.Brand as={NavLink}>Acorn</Navbar.Brand>
+                        <Navbar.Collapse>
+                            <Nav>
+                                <Nav.Link as={NavLink} to="/">Home</Nav.Link>
+                                <Nav.Link as={NavLink} to="/game">Game</Nav.Link>
+                                <Nav.Link as={NavLink} to="/study">Study</Nav.Link>
+                                <Nav.Link as={NavLink} to="/posts">Post</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+            <div className="container">
+                <div>{currentOutlet}</div>
+            </div>
+        </>
     )
 }
 
