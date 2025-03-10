@@ -11,7 +11,7 @@ function PostForm(props) {
         <>
            <h1>새 post 작성 폼</h1>
 
-           <Form action="/posts" method="post" onSubmit={(e)=>{
+           <Form action="/v3/posts" method="post" onSubmit={(e)=>{
                     e.preventDefault();
                     //요청 url
                     const url = e.target.action;
@@ -43,7 +43,7 @@ function PostForm(props) {
                 </FloatingLabel>
                 <Button type="submit" variant="success">저장</Button>
            </Form>
-           <form action="/posts" method="post" onSubmit={(e)=>{
+           <form action="/v3/posts" method="post" onSubmit={(e)=>{
                 e.preventDefault();
                 //요청 url
                 const url = e.target.action;

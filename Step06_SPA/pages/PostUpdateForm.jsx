@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function PostUpdateForm(props) {
@@ -15,7 +16,7 @@ function PostUpdateForm(props) {
     
     useEffect(()=>{
         //컴포넌트가 활성화되는 시점에 수정할 회원의 번호를 이용해서 수정할 회원의 정보를 로딩한다,
-        axios.get(`/posts/${params.id}`)
+        axios.get(`/v3/posts/${params.id}`)
                     .then(res=>{
                         setPost(res.data);
                         //훅이 리턴한 오브텍트에 초기 포스트를 저장해둔다
@@ -40,30 +41,32 @@ function PostUpdateForm(props) {
     return (
         <>
             <h1>수정합니다</h1>
-            <div>
-                <label htmlFor="id">글 번호</label>
-                <input type="text" id="id" value={post.id} readOnly/>
-            </div>
-            <div>
-                <label htmlFor="title">제목</label>
-                <input type="text" id="title" name="title" onChange={handleChange} value={post.title}/>
-            </div>
-            <div>
-                <label htmlFor="author">작성저</label>
-                <input type="text" id="author" name="author" onChange={handleChange} value={post.author}/>
-            </div>
-            <button type="submit" onClick={()=>{
-                axios.put(`/posts/${post.id}`,post)
+            <Form>
+                <Form.Group className="mb-3" controlId="id">
+                    <Form.Label>글 번호호</Form.Label>
+                    <Form.Control type="text" value={post.id} readOnly/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="title">
+                    <Form.Label>제목목</Form.Label>
+                    <Form.Control type="text" name="title" onChange={handleChange} value={post.title}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="author">
+                    <Form.Label>작성자</Form.Label>
+                    <Form.Control type="text" name="author" onChange={handleChange} value={post.author}/>
+                </Form.Group>
+            </Form>
+            <Button type="submit" variant="success" onClick={()=>{
+                axios.put(`/v3/posts/${post.id}`,post)
                 .then(res=>{
-                    alert("글 수정 완료");
+                    alert(res.data.id+" 번 글을 수정했습니다.");
                     navigate("/posts");
                 })
                 .catch(err=>console.log(err));
-            }}>저장</button>
-            <button onClick={()=>{
-                //훅을 이용하여 저장해두었던 초기 post 로 돌린다
+            }}>저장</Button>
+            <Button variant="danger" onClick={()=>{
+                // useRef() 를 이용해서 저장해 두었던 초기 post 로 되돌린다.
                 setPost(savePost.current);
-            }}>취소</button>
+            }}>취소</Button>
         </>
     );
 }

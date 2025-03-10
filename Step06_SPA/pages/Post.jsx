@@ -16,7 +16,7 @@ function App(){
 
     //페이지를 요청해서 출력하는 함수
     const refresh=(pageNum)=>{
-        axios.get("/posts?pageNum="+pageNum)
+        axios.get("/v3/posts?pageNum="+pageNum)
         .then(res=>{
             //서버에서 응답한 data 는 res.data 에 들어있다다
             //상태값을 변경
@@ -80,7 +80,7 @@ function App(){
                             </td>
                             <td>                                
                                 <button onClick={()=>{
-                                    axios.delete(`/posts/${item.id}`)
+                                    axios.delete(`/v3/posts/${item.id}`)
                                     .then(res=>{
                                         alert(res.data.id+"번의 글을 삭제하였습니다");
                                         //현재 페이지 정보가 다시 출려되도록 한다
