@@ -25,7 +25,8 @@ function LoginModal(props) {
     const handleLogin = ()=>{
         axios.post("/auth", state)
         .then(res=>{
-            console.log(res.data);
+            //axios 의 요청이 헤더에 자동 포함 되도록 한다다
+            axios.defaults.headers.common["Authorization"]=res.data;
             //토큰을 localstroage에 저장
             localStorage.token=res.data;
             //토큰을 디코딩해서 userName 을 얻어온다
@@ -49,9 +50,14 @@ function LoginModal(props) {
             setErrorMsg(error.response.data);
         });
     }
+    
+    const handleClose=()=>{
+        dispatch({type:"LOGIN_MODAL", payload : {show:false}});
+    }
+
 
     return (
-        <Modal show={props.show} size="lg" centered>
+        <Modal show={props.show} onHide={handleClose} size="lg" centered>
             <Modal.Header closeButton>
                 <Modal.Title>{loginModal.title}</Modal.Title>
             </Modal.Header>
