@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Breadcrumb, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -29,6 +29,11 @@ function UserDetail(props) {
     }
     return (
         <>
+
+            <Breadcrumb>
+                <Breadcrumb.Item href="/" as={Link} to="/">Home</Breadcrumb.Item>
+                <Breadcrumb.Item active>User</Breadcrumb.Item>  
+            </Breadcrumb>
             <h1>회원 정보입니다다</h1> 
             <Table striped bordered size='sm'>
                 <colgroup>
