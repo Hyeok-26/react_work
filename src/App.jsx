@@ -4,8 +4,8 @@ import BsNavBar from "./components/BsNavBar";
 import LoginModal from "./components/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { decodeToken } from "jsontokens";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 function App(){
 
@@ -30,11 +30,11 @@ function App(){
                 axios.defaults.headers.common["Authorization"]=token;
                 //여기가 실행되면 토큰은 유효하다다
                 //토큰을 디코딩해서 userName 을 얻어온다
-                const decoded=decodeToken(token.substring(7));
+                const decoded=jwtDecode(token.substring(7));
                 //발행할 action
                 const action={type:"USER_INFO", payload:{
-                    userName : decoded.payload.sub,
-                    role : decoded.payload.role
+                    userName : decoded.sub,
+                    role : decoded.role
                 }};
                 //액션 발행하기
                 dispatch(action);

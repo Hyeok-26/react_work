@@ -3,6 +3,7 @@ import { Breadcrumb, Button, FloatingLabel, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { initEditor } from '../editor/SmartEditor';
 import axios from 'axios';
+import AlertModal from '../components/AlertModal';
 
 function PostForm(props) {
 
@@ -21,6 +22,8 @@ function PostForm(props) {
     const inputContent = useRef();
     //경로 이동을 할 함수
     const navigate = useNavigate();
+    //알림 모달을띄울지 말지 state로 관리하기
+    const[modalShow, setModalShow] = useState(false);
 
     return (
         <>
@@ -29,6 +32,10 @@ function PostForm(props) {
                 <Breadcrumb.Item href="/" as={Link} to="/posts">Post</Breadcrumb.Item>
                 <Breadcrumb.Item active>New</Breadcrumb.Item>  
             </Breadcrumb>
+            <AlertModal show={modalShow} message="새 글을 저장했습니다" onYes={()=>{
+                navigate("/posts");
+                setModalShow(false);
+            }}/>
             <h1>새 글 추가 양식입니다</h1>
             <Form>
                 <FloatingLabel label="제목" className="mb-3" controlId="title">
@@ -49,8 +56,7 @@ function PostForm(props) {
                     //axios 를이용하여 API 서버 전송
                     axios.post("/posts",{title, content})
                     .then(res=>{
-                        alert("글을 성공적으로 저장했습니다");
-                        navigate("/posts")
+                        setModalShow(true);
                     })
                     .catch(err=>{console.log(err)});
                 }}>저장</Button>

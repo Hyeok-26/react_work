@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {Pagination, Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 function Post(props) {
@@ -44,7 +45,7 @@ function Post(props) {
     //페이징 숫자를 출력할 때 사용하는 배열을 상태값으로 관리
     const [pageArray, setPageArray]=useState([]);
 
-
+    //post component 가 활성화되었을 때 1번 호출, params 에 변화가 생겼을 때 refresh
     useEffect(()=>{
         //query 파라미터 값을 읽어와 본다
         let pageNum=params.get("pageNum")

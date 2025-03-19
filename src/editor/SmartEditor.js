@@ -91,7 +91,7 @@ function initEditor(id="content"){ // id 는 textarea 의 아이디
         
         elIFrame.style.width = "1px";
         elIFrame.style.height = "1px";
-        console.log(elPlaceHolder.parentNode);
+        //console.log(elPlaceHolder.parentNode);
         elPlaceHolder.parentNode.insertBefore(elIFrame, elPlaceHolder.nextSibling);
         
         attachEvent(elIFrame, "load", function(){

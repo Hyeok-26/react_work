@@ -8,6 +8,7 @@ import UserUpdateForm from "../pages/UserUpdateForm";
 import UserPwdUpdateForm from "../pages/UserPwdUpdateForm";
 import PostForm from "../pages/PostForm";
 import PostDetail from "../pages/PostDetail";
+import PostUpdateForm from "../pages/PostUpdateForm";
 
 const routes=[
     {path:"/index.html", element:<Home/>},
@@ -17,8 +18,8 @@ const routes=[
     {path:"/user/edit", element:<ProtectedRoute><UserUpdateForm/></ProtectedRoute>},
     {path:"/user/password/edit", element:<ProtectedRoute><UserPwdUpdateForm/></ProtectedRoute>},
     {path:"/posts/new", element:<ProtectedRoute><PostForm/></ProtectedRoute>},
-    {path:"posts/:num", element:<PostDetail/>}
-
+    {path:"posts/:num", element:<PostDetail/>},
+    {path:"posts/:num/edit", element:<ProtectedRoute><PostUpdateForm/></ProtectedRoute>}
 ];
 
 //export 해줄 router 객체 만든다
