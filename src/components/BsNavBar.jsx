@@ -23,6 +23,7 @@ function BsNavBar(props) {
                         <Nav className='me-auto'>
                         <Nav.Link as={NavLink} to="/">Home</Nav.Link>
                         <Nav.Link as={NavLink} to="/posts">Post</Nav.Link>
+                        <Nav.Link as={NavLink} to="/quiz">Quiz</Nav.Link>
                         </Nav>
                         {userInfo ? 
                             <>
